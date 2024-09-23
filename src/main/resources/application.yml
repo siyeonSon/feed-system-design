@@ -12,3 +12,8 @@ spring:
       host: ${REDIS_HOST:localhost}
       password: ${REDIS_PASSWORD}
       port: ${REDIS_PORT:6379}
+swagger:
+  server-url: ${SWAGGER_SERVER_URL:http://localhost:8080}
+springdoc:
+  swagger-ui:
+    path: /swagger
