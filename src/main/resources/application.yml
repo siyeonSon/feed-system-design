@@ -7,3 +7,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      password: ${REDIS_PASSWORD}
+      port: ${REDIS_PORT:6379}
