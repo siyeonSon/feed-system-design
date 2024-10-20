@@ -12,6 +12,9 @@ public enum ErrorCode {
     ENTITY_NOT_FOUND(400, "C_005", "지정한 엔티티를 찾을 수 없습니다."),
 
     USER_NOT_FOUND(404, "U_001", "존재하지 않는 사용자입니다."),
+
+    POST_CONTENT_TOO_SHORT(400, "P_001", "게시물 내용이 짧습니다."),
+    POST_CONTENT_TOO_LONG(400, "P_002", "게시물 내용이 너무 깁니다"),
     ;
 
     private final int status;
