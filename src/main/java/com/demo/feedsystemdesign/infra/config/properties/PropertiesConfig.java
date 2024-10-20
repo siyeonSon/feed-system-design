@@ -6,4 +6,5 @@ import org.springframework.context.annotation.Configuration;
 
 @EnableConfigurationProperties(RedisProperties.class)
 @Configuration
-public class PropertiesConfig {}
+public class PropertiesConfig {
+}

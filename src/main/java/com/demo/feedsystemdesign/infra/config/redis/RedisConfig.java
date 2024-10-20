@@ -1,5 +1,6 @@
 package com.demo.feedsystemdesign.infra.config.redis;
 
+import java.time.Duration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,8 +12,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-import java.time.Duration;
-
 @Configuration
 @RequiredArgsConstructor
 public class RedisConfig {
@@ -23,8 +22,9 @@ public class RedisConfig {
     public RedisConnectionFactory redisConnectionFactory() {
         RedisStandaloneConfiguration redisConfig =
                 new RedisStandaloneConfiguration(redisProperties.host(), redisProperties.port());
-        if (!redisProperties.password().isBlank())
+        if (!redisProperties.password().isBlank()) {
             redisConfig.setPassword(redisProperties.password());
+        }
         LettuceClientConfiguration clientConfig =
                 LettuceClientConfiguration.builder()
                         .commandTimeout(Duration.ofSeconds(1))

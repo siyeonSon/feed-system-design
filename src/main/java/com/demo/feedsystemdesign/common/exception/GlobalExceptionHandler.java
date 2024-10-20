@@ -1,4 +1,4 @@
-package com.demo.feedsystemdesign.global.exception;
+package com.demo.feedsystemdesign.common.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

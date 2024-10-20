@@ -1,9 +1,8 @@
 package com.demo.feedsystemdesign.infra.cache.domain;
 
-import lombok.Getter;
-
 import java.io.Serial;
 import java.io.Serializable;
+import lombok.Getter;
 
 @Getter
 public class UserInfoCache implements Serializable {
