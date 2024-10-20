@@ -1,11 +1,7 @@
 package com.demo.feedsystemdesign.post.domain;
 
 import com.demo.feedsystemdesign.common.BaseTimeEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,5 +21,10 @@ public class Post extends BaseTimeEntity {
 
     @Column(nullable = false)
     private Long userId;
+
+    public Post(Long userId, String content) {
+        this.userId = userId;
+        this.content = content;
+    }
 
 }
