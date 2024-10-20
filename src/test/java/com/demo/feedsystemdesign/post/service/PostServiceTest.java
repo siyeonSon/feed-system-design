@@ -2,7 +2,7 @@ package com.demo.feedsystemdesign.post.service;
 
 import com.demo.feedsystemdesign.common.exception.ErrorCode;
 import com.demo.feedsystemdesign.common.exception.NotFoundException;
-import com.demo.feedsystemdesign.post.domain.Post;
+import com.demo.feedsystemdesign.post.service.dto.PostResponse;
 import com.demo.feedsystemdesign.user.domain.User;
 import com.demo.feedsystemdesign.user.domain.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -35,9 +35,8 @@ class PostServiceTest {
         User saved = userRepository.save(user);
         String content = "test content";
 
-        Post post = postService.createPost(saved.getId(), content);
+        PostResponse post = postService.createPost(saved.getId(), content);
 
-        assertThat(post.getUserId()).isEqualTo(saved.getId());
-        assertThat(post.getContent()).isEqualTo(content);
+        assertThat(post.content()).isEqualTo(content);
     }
 }
