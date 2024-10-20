@@ -10,7 +10,6 @@ import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Getter
@@ -23,14 +22,7 @@ public class User extends BaseTimeEntity {
     @Column(name = "user_id")
     private Long id;
 
-    @Column(length = 50, nullable = false)
-    private String nickname;
-
     @Column(nullable = false)
-    private String profileImageUrl;
-
-    @Column(nullable = false)
-    @ColumnDefault("false")
-    private boolean isInfluencer;
+    private boolean isInfluencer = false;
 
 }
