@@ -22,4 +22,8 @@ public class Followers {
     public boolean contains(Long otherUserId) {
         return followers.contains(otherUserId);
     }
+
+    public List<Long> findAll() {
+        return followers;
+    }
 }
