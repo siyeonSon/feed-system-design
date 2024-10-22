@@ -21,6 +21,6 @@ public class FollowService {
     }
 
     public List<Long> getFollowers(Long userId) {
-       return store.get(userId).findAll();
+        return store.get(userId).findAll();
     }
 }

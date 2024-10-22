@@ -1,6 +1,5 @@
 package com.demo.feedsystemdesign.follow.domain;
 
-import com.demo.feedsystemdesign.common.exception.ErrorCode;
 import com.demo.feedsystemdesign.common.exception.FollowException;
 
 import java.util.ArrayList;
