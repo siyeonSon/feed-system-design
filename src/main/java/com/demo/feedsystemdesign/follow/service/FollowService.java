@@ -12,6 +12,7 @@ public class FollowService {
 
     Map<Long, Followers> store = new HashMap<>();
 
+    // TODO: use primitive type
     public void follow(Long userId, Long subjectId) {
         if (store.get(subjectId) == null) {
             store.put(subjectId, new Followers(subjectId));
