@@ -33,11 +33,8 @@ public class PostService {
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
     }
 
-    public List<PostResponse> getPosts(Long userId) {
-        return postRepository.findAllByUserId(userId)
-                .stream()
-                .map(PostResponse::of)
-                .toList();
+    public List<Post> getPosts(Long userId) {
+        return postRepository.findAllByUserId(userId);
     }
 
 }

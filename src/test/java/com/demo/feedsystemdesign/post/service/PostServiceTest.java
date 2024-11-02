@@ -49,8 +49,8 @@ class PostServiceTest {
         assertThat(postService.getPosts(user.getId()))
                 .singleElement()
                 .satisfies(result -> {
-                    assertThat(result.content()).isEqualTo(post.content());
-                    assertThat(result.userId()).isEqualTo(user.getId());
+                    assertThat(result.getContent()).isEqualTo(post.content());
+                    assertThat(result.getUserId()).isEqualTo(user.getId());
                 });
     }
 
