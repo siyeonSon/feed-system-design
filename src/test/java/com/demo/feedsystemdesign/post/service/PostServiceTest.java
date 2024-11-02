@@ -39,4 +39,19 @@ class PostServiceTest {
 
         assertThat(post.content()).isEqualTo(content);
     }
+
+    @Test
+    void 사용자의_모든_게시물을_조회한다() {
+        User user = userRepository.save(new User());
+
+        PostResponse post = postService.createPost(user.getId(), "test content");
+
+        assertThat(postService.getPosts(user.getId()))
+                .singleElement()
+                .satisfies(result -> {
+                    assertThat(result.content()).isEqualTo(post.content());
+                    assertThat(result.userId()).isEqualTo(user.getId());
+                });
+    }
+
 }
