@@ -37,6 +37,13 @@ public class FollowService {
         return store.get(userId).findAll();
     }
 
+    public List<Long> getFollowings(Long userId) {
+        return store.values().stream()
+                .filter(followers -> followers.contains(userId))
+                .map(Followers::getUserId)
+                .toList();
+    }
+
     // TODO: 중복 코드 제거
     private void validateExists(Long userId) {
         userRepository.findById(userId)
