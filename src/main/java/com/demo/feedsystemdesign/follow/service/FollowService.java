@@ -4,6 +4,7 @@ import com.demo.feedsystemdesign.common.exception.NotFoundException;
 import com.demo.feedsystemdesign.follow.domain.Follow;
 import com.demo.feedsystemdesign.follow.domain.FollowRepository;
 import com.demo.feedsystemdesign.user.domain.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class FollowService {
     private final UserRepository userRepository;
     private final FollowRepository followRepository;
 
+    @Transactional
     public void follow(long sourceId, long targetId) {
         validateExists(sourceId);
         validateExists(targetId);
