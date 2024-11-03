@@ -55,7 +55,6 @@ public class BoxingTest {
         assertThat(operationsWithoutBoxing).isCloseTo(operationsWithUnboxingAndBoxing, Duration.ofMillis(10));
     }
 
-
     private Duration time(Runnable runnable) {
         Instant start = Instant.now();
         runnable.run();
