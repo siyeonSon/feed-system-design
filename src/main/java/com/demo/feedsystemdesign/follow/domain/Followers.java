@@ -9,34 +9,34 @@ import static com.demo.feedsystemdesign.common.exception.ErrorCode.SELF_FOLLOWIN
 
 public class Followers {
 
-    private final Long userId;
+    private final Long ownerId;
     private final List<Long> followers;
 
-    public Followers(Long userId) {
-        this(userId, new ArrayList<>());
+    public Followers(Long ownerId) {
+        this(ownerId, new ArrayList<>());
     }
 
-    public Followers(Long userId, List<Long> followers) {
-        this.userId = userId;
+    public Followers(Long ownerId, List<Long> followers) {
+        this.ownerId = ownerId;
         this.followers = followers;
     }
 
-    public void add(Long otherUserId) {
-        if (userId.equals(otherUserId)) {
+    public void add(Long followerId) {
+        if (ownerId.equals(followerId)) {
             throw new FollowException(SELF_FOLLOWING);
         }
-        followers.add(otherUserId);
+        followers.add(followerId);
     }
 
-    public boolean contains(Long otherUserId) {
-        return followers.contains(otherUserId);
+    public boolean contains(Long followerId) {
+        return followers.contains(followerId);
     }
 
     public List<Long> findAll() {
         return followers;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getOwnerId() {
+        return ownerId;
     }
 }
