@@ -5,7 +5,6 @@ import com.demo.feedsystemdesign.common.exception.PostContentLengthException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-@SuppressWarnings("NonAsciiCharacters")
 class PostTest {
 
     @Test

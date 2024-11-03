@@ -12,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@SuppressWarnings("NonAsciiCharacters")
 @SpringBootTest
 class PostServiceTest {
 
@@ -39,4 +38,19 @@ class PostServiceTest {
 
         assertThat(post.content()).isEqualTo(content);
     }
+
+    @Test
+    void 사용자의_모든_게시물을_조회한다() {
+        User user = userRepository.save(new User());
+
+        PostResponse post = postService.createPost(user.getId(), "test content");
+
+        assertThat(postService.getPosts(user.getId()))
+                .singleElement()
+                .satisfies(result -> {
+                    assertThat(result.getContent()).isEqualTo(post.content());
+                    assertThat(result.getUserId()).isEqualTo(user.getId());
+                });
+    }
+
 }
