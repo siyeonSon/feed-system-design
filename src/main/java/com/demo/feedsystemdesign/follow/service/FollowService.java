@@ -15,7 +15,7 @@ import static com.demo.feedsystemdesign.common.exception.ErrorCode.USER_NOT_FOUN
 public class FollowService {
 
     private final UserRepository userRepository;
-    Map<Long, Followers> store = new HashMap<>();
+    Map<Long, Followers> followersRepository = new HashMap<>();
 
     public FollowService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -26,19 +26,19 @@ public class FollowService {
         validateExists(userId);
         validateExists(subjectId);
 
-        if (store.get(subjectId) == null) {
-            store.put(subjectId, new Followers(subjectId));
+        if (followersRepository.get(subjectId) == null) {
+            followersRepository.put(subjectId, new Followers(subjectId));
         }
-        Followers followers = store.get(subjectId);
+        Followers followers = followersRepository.get(subjectId);
         followers.add(userId);
     }
 
     public List<Long> getFollowers(Long userId) {
-        return store.get(userId).findAll();
+        return followersRepository.get(userId).findAll();
     }
 
     public List<Long> getFollowings(Long userId) {
-        return store.values().stream()
+        return followersRepository.values().stream()
                 .filter(followers -> followers.contains(userId))
                 .map(Followers::getUserId)
                 .toList();
