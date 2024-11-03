@@ -44,7 +44,6 @@ public class FollowService {
                 .toList();
     }
 
-    // TODO: 중복 코드 제거
     private void validateExists(Long userId) {
         userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
