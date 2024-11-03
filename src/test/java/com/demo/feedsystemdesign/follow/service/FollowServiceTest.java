@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
@@ -20,28 +18,28 @@ class FollowServiceTest {
     @Autowired
     private UserRepository userRepository;
 
-    // TODO: 테스트 격리
     @Test
     void 다른_사용자를_팔로우_할_수_있다() {
-        Long userId = 1L;
-        Long subjectId = 2L;
+        User user = userRepository.save(new User());
+        User subject = userRepository.save(new User());
 
-        followService.follow(userId, subjectId);
+        followService.follow(user.getId(), subject.getId());
 
-        assertThat(followService.getFollowers(subjectId)).contains(userId);
+        assertThat(followService.getFollowers(subject.getId()))
+                .containsExactly(user.getId());
     }
 
-    // TODO: id를 직관적으로 사용
     @Test
     void 어떤_사용자의_팔로워들을_알_수_있다() {
-        userRepository.save(new User());
-        userRepository.save(new User());
-        userRepository.save(new User());
+        User user = userRepository.save(new User());
+        User subject = userRepository.save(new User());
+        User otherSubject = userRepository.save(new User());
 
-        followService.follow(2L, 1L);
-        followService.follow(3L, 1L);
+        followService.follow(subject.getId(), user.getId());
+        followService.follow(otherSubject.getId(), user.getId());
 
-        assertThat(followService.getFollowers(1L)).contains(2L, 3L);
+        assertThat(followService.getFollowers(user.getId()))
+                .containsExactly(subject.getId(), otherSubject.getId());
     }
 
     @Test
@@ -65,15 +63,14 @@ class FollowServiceTest {
     @Test
     void 사용자가_팔로우_하고_있는_사용자들을_반환한다() {
         User user = userRepository.save(new User());
-        User follower1 = userRepository.save(new User());
-        User follower2 = userRepository.save(new User());
+        User follower = userRepository.save(new User());
+        User otherFollower = userRepository.save(new User());
 
-        followService.follow(user.getId(), follower1.getId());
-        followService.follow(user.getId(), follower2.getId());
+        followService.follow(user.getId(), follower.getId());
+        followService.follow(user.getId(), otherFollower.getId());
 
-        List<Long> followingIds = followService.getFollowings(user.getId());
-
-        assertThat(followingIds).containsExactly(follower1.getId(), follower2.getId());
+        assertThat(followService.getFollowings(user.getId()))
+                .containsExactly(follower.getId(), otherFollower.getId());
     }
 
 }
