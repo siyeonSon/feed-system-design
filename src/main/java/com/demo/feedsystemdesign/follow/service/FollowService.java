@@ -21,8 +21,7 @@ public class FollowService {
         this.userRepository = userRepository;
     }
 
-    // TODO: use primitive type
-    public void follow(Long userId, Long subjectId) {
+    public void follow(long userId, long subjectId) {
         validateExists(userId);
         validateExists(subjectId);
 
@@ -33,18 +32,18 @@ public class FollowService {
         followers.add(userId);
     }
 
-    public List<Long> getFollowers(Long userId) {
+    public List<Long> getFollowers(long userId) {
         return followersRepository.get(userId).findAll();
     }
 
-    public List<Long> getFollowings(Long userId) {
+    public List<Long> getFollowings(long userId) {
         return followersRepository.values().stream()
                 .filter(followers -> followers.contains(userId))
                 .map(Followers::getOwnerId)
                 .toList();
     }
 
-    private void validateExists(Long userId) {
+    private void validateExists(long userId) {
         userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
     }
