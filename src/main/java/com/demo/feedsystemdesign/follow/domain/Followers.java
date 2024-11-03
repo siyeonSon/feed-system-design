@@ -10,30 +10,29 @@ import static com.demo.feedsystemdesign.common.exception.ErrorCode.SELF_FOLLOWIN
 public class Followers {
 
     private final long ownerId;
-    private final List<Long> followers;
+    private final List<Follow> followers;
 
     public Followers(long ownerId) {
-        this(ownerId, new ArrayList<>());
-    }
-
-    public Followers(long ownerId, List<Long> followers) {
         this.ownerId = ownerId;
-        this.followers = followers;
+        this.followers = new ArrayList<>();
     }
 
     public void add(long followerId) {
         if (ownerId == followerId) {
             throw new FollowException(SELF_FOLLOWING);
         }
-        followers.add(followerId);
+        followers.add(new Follow(ownerId, followerId));
     }
 
     public boolean contains(long followerId) {
-        return followers.contains(followerId);
+        return followers.stream()
+                .anyMatch(follow -> follow.getFollowerId() == followerId);
     }
 
     public List<Long> findAll() {
-        return followers;
+        return followers.stream()
+                .map(Follow::getFollowerId)
+                .toList();
     }
 
     public Long getOwnerId() {
