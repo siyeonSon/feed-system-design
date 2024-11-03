@@ -48,4 +48,17 @@ public class FeedServiceTest {
         assertThat(feed.getPosts())
                 .allMatch(post -> post.getUserId().equals(subject.getId()));
     }
+
+    @Test
+    void 팔로우_하지_않은_사용자의_게시물은_조회하지_않는다() {
+        User user = userRepository.save(new User());
+        User subject = userRepository.save(new User());
+        postService.createPost(subject.getId(), "test content");
+        postService.createPost(subject.getId(), "test content");
+
+        Feed feed = feedService.getFeed(user.getId());
+
+        assertThat(feed.getPosts())
+                .noneMatch(post -> post.getUserId().equals(subject.getId()));
+    }
 }
