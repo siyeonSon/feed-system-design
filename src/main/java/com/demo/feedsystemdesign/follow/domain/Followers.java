@@ -26,12 +26,12 @@ public class Followers {
 
     public boolean contains(long followerId) {
         return followers.stream()
-                .anyMatch(follow -> follow.getFollowerId() == followerId);
+                .anyMatch(follow -> follow.getTargetId() == followerId);
     }
 
     public List<Long> findAll() {
         return followers.stream()
-                .map(Follow::getFollowerId)
+                .map(Follow::getTargetId)
                 .toList();
     }
 
