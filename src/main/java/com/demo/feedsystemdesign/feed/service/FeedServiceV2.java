@@ -4,6 +4,7 @@ import com.demo.feedsystemdesign.feed.domain.Feed;
 import com.demo.feedsystemdesign.feed.domain.FeedPost;
 import com.demo.feedsystemdesign.feed.domain.FeedPostRepository;
 import com.demo.feedsystemdesign.post.service.PostServiceV2;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ public class FeedServiceV2 {
         return new Feed(postService.getPostsBy(postIds));
     }
 
+    @Transactional
     public void insert(Long userId, Long postId) {
         FeedPost feedPost = new FeedPost(userId, postId);
         feedPostRepository.save(feedPost);
