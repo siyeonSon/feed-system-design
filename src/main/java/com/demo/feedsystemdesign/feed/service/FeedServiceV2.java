@@ -25,10 +25,4 @@ public class FeedServiceV2 {
         return new Feed(postService.getPostsBy(postIds));
     }
 
-    @Transactional
-    public void insert(Long userId, Long postId) {
-        FeedPost feedPost = new FeedPost(userId, postId);
-        feedPostRepository.save(feedPost);
-    }
-
 }
