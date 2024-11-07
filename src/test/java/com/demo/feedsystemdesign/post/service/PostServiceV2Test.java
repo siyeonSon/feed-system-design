@@ -30,7 +30,7 @@ class PostServiceV2Test {
     void 사용자가_게시물을_작성하면_팔로워들의_피드에_해당_게시물을_삽입한다() {
         User user = userRepository.save(new User());
         User follower = userRepository.save(new User());
-        followService.follow(user.getId(), follower.getId());
+        followService.follow(follower.getId(), user.getId());
 
         PostResponse post = postService.createPost(user.getId(), "test content");
 
