@@ -13,10 +13,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
-class PostServiceTest {
+class PostServiceV1Test {
 
     @Autowired
-    private PostService postService;
+    private PostServiceV1 postService;
 
     @Autowired
     private UserRepository userRepository;

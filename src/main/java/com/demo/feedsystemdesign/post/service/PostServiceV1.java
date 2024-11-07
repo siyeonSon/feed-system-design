@@ -15,7 +15,7 @@ import static com.demo.feedsystemdesign.common.exception.ErrorCode.USER_NOT_FOUN
 
 @Service
 @RequiredArgsConstructor
-public class PostService {
+public class PostServiceV1 {
 
     private final UserRepository userRepository;
     private final PostRepository postRepository;

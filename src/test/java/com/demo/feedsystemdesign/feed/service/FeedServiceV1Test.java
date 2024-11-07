@@ -2,7 +2,7 @@ package com.demo.feedsystemdesign.feed.service;
 
 import com.demo.feedsystemdesign.feed.domain.Feed;
 import com.demo.feedsystemdesign.follow.service.FollowService;
-import com.demo.feedsystemdesign.post.service.PostService;
+import com.demo.feedsystemdesign.post.service.PostServiceV1;
 import com.demo.feedsystemdesign.user.domain.User;
 import com.demo.feedsystemdesign.user.domain.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -12,16 +12,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-public class FeedServiceTest {
+public class FeedServiceV1Test {
 
     @Autowired
-    private FeedService feedService;
+    private FeedServiceV1 feedService;
 
     @Autowired
     private FollowService followService;
 
     @Autowired
-    private PostService postService;
+    private PostServiceV1 postService;
 
     @Autowired
     private UserRepository userRepository;
