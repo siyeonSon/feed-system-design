@@ -1,4 +1,4 @@
-package com.demo.feedsystemdesign.post.event;
+package com.demo.feedsystemdesign.post.service.v3.event;
 
 public class PostCreatedEvent {
     private final Long userId;

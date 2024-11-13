@@ -1,11 +1,11 @@
-package com.demo.feedsystemdesign.feed.service;
+package com.demo.feedsystemdesign.feed.service.v3;
 
 import com.demo.feedsystemdesign.feed.domain.Feed;
 import com.demo.feedsystemdesign.feed.domain.FeedPost;
 import com.demo.feedsystemdesign.feed.domain.FeedPostRepository;
 import com.demo.feedsystemdesign.follow.service.FollowService;
-import com.demo.feedsystemdesign.post.event.PostCreatedEvent;
-import com.demo.feedsystemdesign.post.service.PostServiceV2Async;
+import com.demo.feedsystemdesign.post.service.v3.event.PostCreatedEvent;
+import com.demo.feedsystemdesign.post.service.v3.PostServiceV3;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
@@ -17,9 +17,9 @@ import java.util.concurrent.Future;
 
 @RequiredArgsConstructor
 @Service
-public class FeedServiceV2Async {
+public class FeedServiceV3 {
 
-    private final PostServiceV2Async postService;
+    private final PostServiceV3 postService;
     private final FeedPostRepository feedPostRepository;
     private final FollowService followService;
 

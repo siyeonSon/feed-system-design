@@ -1,6 +1,6 @@
-package com.demo.feedsystemdesign.post.service;
+package com.demo.feedsystemdesign.post.service.v3;
 
-import com.demo.feedsystemdesign.feed.service.FeedServiceV2Async;
+import com.demo.feedsystemdesign.feed.service.v3.FeedServiceV3;
 import com.demo.feedsystemdesign.follow.service.FollowService;
 import com.demo.feedsystemdesign.post.service.dto.PostResponse;
 import com.demo.feedsystemdesign.user.domain.User;
@@ -15,10 +15,10 @@ import java.util.concurrent.TimeUnit;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-public class PostServiceV2AsyncIntegrationTest {
+public class PostServiceV3IntegrationTest {
 
     @Autowired
-    private PostServiceV2Async postService;
+    private PostServiceV3 postService;
 
     @Autowired
     private UserRepository userRepository;
@@ -27,7 +27,7 @@ public class PostServiceV2AsyncIntegrationTest {
     private FollowService followService;
 
     @Autowired
-    private FeedServiceV2Async feedService;
+    private FeedServiceV3 feedService;
 
     @Autowired
     ThreadPoolTaskExecutor taskExecutor;
@@ -41,7 +41,8 @@ public class PostServiceV2AsyncIntegrationTest {
         PostResponse post = postService.createPost(user.getId(), "test content");
         try {
             taskExecutor.getThreadPoolExecutor().awaitTermination(1, TimeUnit.SECONDS);
-        } catch (Exception ignored) { }
+        } catch (Exception ignored) {
+        }
 
         assertThat(feedService.getFeed(follower.getId()).getPosts())
                 .extracting("id")

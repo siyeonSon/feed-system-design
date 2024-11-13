@@ -1,10 +1,10 @@
-package com.demo.feedsystemdesign.post.service;
+package com.demo.feedsystemdesign.post.service.v3;
 
 import com.demo.feedsystemdesign.common.exception.NotFoundException;
 import com.demo.feedsystemdesign.post.domain.Post;
 import com.demo.feedsystemdesign.post.domain.PostRepository;
-import com.demo.feedsystemdesign.post.event.PostCreatedEvent;
 import com.demo.feedsystemdesign.post.service.dto.PostResponse;
+import com.demo.feedsystemdesign.post.service.v3.event.PostCreatedEvent;
 import com.demo.feedsystemdesign.user.domain.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
@@ -17,7 +17,7 @@ import static com.demo.feedsystemdesign.common.exception.ErrorCode.USER_NOT_FOUN
 
 @Service
 @RequiredArgsConstructor
-public class PostServiceV2Async {
+public class PostServiceV3 {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;

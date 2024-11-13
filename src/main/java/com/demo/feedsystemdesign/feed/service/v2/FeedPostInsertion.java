@@ -1,8 +1,8 @@
-package com.demo.feedsystemdesign.feed.service;
+package com.demo.feedsystemdesign.feed.service.v2;
 
 import com.demo.feedsystemdesign.feed.domain.FeedPost;
 import com.demo.feedsystemdesign.feed.domain.FeedPostRepository;
-import com.demo.feedsystemdesign.post.service.FeedInsertion;
+import com.demo.feedsystemdesign.post.service.v2.FeedInsertion;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 
