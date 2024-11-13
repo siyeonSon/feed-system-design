@@ -1,7 +1,6 @@
 package com.demo.feedsystemdesign.post.service;
 
 import com.demo.feedsystemdesign.common.exception.NotFoundException;
-import com.demo.feedsystemdesign.follow.service.FollowService;
 import com.demo.feedsystemdesign.post.domain.Post;
 import com.demo.feedsystemdesign.post.domain.PostRepository;
 import com.demo.feedsystemdesign.post.event.PostCreatedEvent;
@@ -22,8 +21,6 @@ public class PostServiceV2Async {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;
-    private final FollowService followService;
-    private final FeedInsertion feedInsertion;
     private final ApplicationEventPublisher eventPublisher;
 
     @Transactional
@@ -32,11 +29,7 @@ public class PostServiceV2Async {
         Post post = new Post(userId, content);
         Post saved = postRepository.save(post);
 
-
-        for (Long followerId : followService.getFollowers(userId)) {
-            eventPublisher.publishEvent(new PostCreatedEvent(followerId, post.getId()));
-//            feedInsertion.insert(followerId, post.getId());
-        }
+        eventPublisher.publishEvent(new PostCreatedEvent(userId, post.getId()));
 
         return PostResponse.of(saved);
     }
