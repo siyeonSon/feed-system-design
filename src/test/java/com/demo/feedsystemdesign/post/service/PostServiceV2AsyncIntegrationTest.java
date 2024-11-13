@@ -8,6 +8,9 @@ import com.demo.feedsystemdesign.user.domain.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+
+import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,6 +29,9 @@ public class PostServiceV2AsyncIntegrationTest {
     @Autowired
     private FeedServiceV2Async feedService;
 
+    @Autowired
+    ThreadPoolTaskExecutor taskExecutor;
+
     @Test
     void 사용자가_게시물을_작성하면_팔로워들의_피드에_해당_게시물을_삽입한다() {
         User user = userRepository.save(new User());
@@ -33,6 +39,9 @@ public class PostServiceV2AsyncIntegrationTest {
         followService.follow(follower.getId(), user.getId());
 
         PostResponse post = postService.createPost(user.getId(), "test content");
+        try {
+            taskExecutor.getThreadPoolExecutor().awaitTermination(1, TimeUnit.SECONDS);
+        } catch (Exception ignored) { }
 
         assertThat(feedService.getFeed(follower.getId()).getPosts())
                 .extracting("id")

@@ -34,7 +34,10 @@ class FeedServiceV2AsyncTest {
         followService.follow(follower.getId(), user.getId());
         Post post = postRepository.save(new Post(user.getId(), "test content"));
 
-        feedService.onPostCreated(new PostCreatedEvent(user.getId(), post.getId()));
+        try {
+            feedService.onPostCreated(new PostCreatedEvent(user.getId(), post.getId()))
+                    .get();
+        } catch (Exception ignored) { }
 
         assertThat(feedService.getFeed(follower.getId()).getPosts())
                 .extracting("id")

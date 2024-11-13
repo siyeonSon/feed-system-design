@@ -8,9 +8,12 @@ import com.demo.feedsystemdesign.post.event.PostCreatedEvent;
 import com.demo.feedsystemdesign.post.service.PostServiceV2Async;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Future;
 
 @RequiredArgsConstructor
 @Service
@@ -28,11 +31,13 @@ public class FeedServiceV2Async {
         return new Feed(postService.getPostsBy(postIds));
     }
 
+    @Async
     @EventListener
-    public void onPostCreated(PostCreatedEvent event) {
+    public Future<Void> onPostCreated(PostCreatedEvent event) {
         Long userId = event.getUserId();
         for (Long followerId : followService.getFollowers(userId)) {
             feedPostRepository.save(new FeedPost(followerId, event.getPostId()));
         }
+        return CompletableFuture.completedFuture(null);
     }
 }
