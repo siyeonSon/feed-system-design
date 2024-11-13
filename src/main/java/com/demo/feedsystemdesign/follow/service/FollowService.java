@@ -20,28 +20,28 @@ public class FollowService {
     private final FollowRepository followRepository;
 
     @Transactional
-    public void follow(long sourceId, long targetId) {
+    public void follow(Long sourceId, Long targetId) {
         validateExists(sourceId);
         validateExists(targetId);
 
         followRepository.save(new Follow(sourceId, targetId));
     }
 
-    public List<Long> getFollowers(long userId) {
+    public List<Long> getFollowers(Long userId) {
         return followRepository.findAllByTargetId(userId)
                 .stream()
                 .map(Follow::getSourceId)
                 .toList();
     }
 
-    public List<Long> getFollowings(long userId) {
+    public List<Long> getFollowings(Long userId) {
         return followRepository.findAllBySourceId(userId)
                 .stream()
                 .map(Follow::getTargetId)
                 .toList();
     }
 
-    private void validateExists(long userId) {
+    private void validateExists(Long userId) {
         userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
     }

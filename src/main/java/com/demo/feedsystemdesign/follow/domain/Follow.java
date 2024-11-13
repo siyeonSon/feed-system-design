@@ -2,12 +2,13 @@ package com.demo.feedsystemdesign.follow.domain;
 
 import com.demo.feedsystemdesign.common.BaseTimeEntity;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Follow extends BaseTimeEntity {
 
     @Id
@@ -15,10 +16,10 @@ public class Follow extends BaseTimeEntity {
     @Column(name = "follow_id")
     private Long id;
 
-    private long sourceId;
-    private long targetId;
+    private Long sourceId;
+    private Long targetId;
 
-    public Follow(long sourceId, long targetId) {
+    public Follow(Long sourceId, Long targetId) {
         this.sourceId = sourceId;
         this.targetId = targetId;
     }
