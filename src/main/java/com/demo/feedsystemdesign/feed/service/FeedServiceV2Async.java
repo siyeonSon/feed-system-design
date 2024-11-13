@@ -5,7 +5,7 @@ import com.demo.feedsystemdesign.feed.domain.FeedPost;
 import com.demo.feedsystemdesign.feed.domain.FeedPostRepository;
 import com.demo.feedsystemdesign.follow.service.FollowService;
 import com.demo.feedsystemdesign.post.event.PostCreatedEvent;
-import com.demo.feedsystemdesign.post.service.PostServiceV2;
+import com.demo.feedsystemdesign.post.service.PostServiceV2Async;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class FeedServiceV2Async {
 
-    private final PostServiceV2 postService;
+    private final PostServiceV2Async postService;
     private final FeedPostRepository feedPostRepository;
     private final FollowService followService;
 
