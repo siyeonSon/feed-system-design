@@ -1,4 +1,4 @@
-package com.demo.feedsystemdesign.post.service;
+package com.demo.feedsystemdesign.post.service.v3;
 
 import com.demo.feedsystemdesign.common.exception.NotFoundException;
 import com.demo.feedsystemdesign.post.domain.Post;
@@ -17,7 +17,7 @@ import static com.demo.feedsystemdesign.common.exception.ErrorCode.USER_NOT_FOUN
 
 @Service
 @RequiredArgsConstructor
-public class PostServiceV2Async {
+public class PostServiceV3 {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;

@@ -1,4 +1,4 @@
-package com.demo.feedsystemdesign.post.service;
+package com.demo.feedsystemdesign.post.service.v3;
 
 import com.demo.feedsystemdesign.post.event.PostCreatedEvent;
 import com.demo.feedsystemdesign.user.domain.User;
@@ -13,10 +13,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @RecordApplicationEvents
-class PostServiceV2AsyncTest {
+class PostServiceV3Test {
 
     @Autowired
-    private PostServiceV2Async postService;
+    private PostServiceV3 postService;
 
     @Autowired
     private UserRepository userRepository;
@@ -27,6 +27,6 @@ class PostServiceV2AsyncTest {
         postService.createPost(user.getId(), "test content");
 
         assertThat(events.stream(PostCreatedEvent.class).count())
-                        .isEqualTo(1);
+                .isEqualTo(1);
     }
 }

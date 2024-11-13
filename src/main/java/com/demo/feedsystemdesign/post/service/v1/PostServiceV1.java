@@ -1,4 +1,4 @@
-package com.demo.feedsystemdesign.post.service;
+package com.demo.feedsystemdesign.post.service.v1;
 
 import com.demo.feedsystemdesign.common.exception.NotFoundException;
 import com.demo.feedsystemdesign.post.domain.Post;

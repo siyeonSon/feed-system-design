@@ -1,4 +1,4 @@
-package com.demo.feedsystemdesign.post.service;
+package com.demo.feedsystemdesign.post.service.v2;
 
 public interface FeedInsertion {
 
