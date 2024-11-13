@@ -8,4 +8,13 @@ public class PostCreatedEvent {
         this.userId = userId;
         this.postId = postId;
     }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public Long getPostId() {
+        return postId;
+    }
+
 }
