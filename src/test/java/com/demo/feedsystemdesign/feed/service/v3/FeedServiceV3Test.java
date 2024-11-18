@@ -4,15 +4,15 @@ import com.demo.feedsystemdesign.follow.service.FollowService;
 import com.demo.feedsystemdesign.post.domain.Post;
 import com.demo.feedsystemdesign.post.domain.PostRepository;
 import com.demo.feedsystemdesign.post.service.v3.event.PostCreatedEvent;
+import com.demo.feedsystemdesign.support.general.ServiceTest;
 import com.demo.feedsystemdesign.user.domain.User;
 import com.demo.feedsystemdesign.user.domain.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
+@ServiceTest
 class FeedServiceV3Test {
 
     @Autowired
