@@ -3,16 +3,16 @@ package com.demo.feedsystemdesign.post.service.v1;
 import com.demo.feedsystemdesign.common.exception.ErrorCode;
 import com.demo.feedsystemdesign.common.exception.NotFoundException;
 import com.demo.feedsystemdesign.post.service.dto.PostResponse;
+import com.demo.feedsystemdesign.support.general.ServiceTest;
 import com.demo.feedsystemdesign.user.domain.User;
 import com.demo.feedsystemdesign.user.domain.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@SpringBootTest
+@ServiceTest
 class PostServiceV1Test {
 
     @Autowired
