@@ -44,13 +44,6 @@ public class FollowServiceV2 {
         return cachedFollowerIds.stream().toList();
     }
 
-    public List<Long> getFollowings(Long userId) {
-        return followRepository.findAllBySourceId(userId)
-                .stream()
-                .map(Follow::getTargetId)
-                .toList();
-    }
-
     private void validateExists(Long userId) {
         userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));

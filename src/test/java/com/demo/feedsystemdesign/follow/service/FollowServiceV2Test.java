@@ -76,17 +76,4 @@ class FollowServiceV2Test {
                 .hasMessage(ErrorCode.USER_NOT_FOUND.getMessage());
     }
 
-    @Test
-    void 사용자가_팔로우_하고_있는_사용자들을_반환한다() {
-        User user = userRepository.save(new User());
-        User follower = userRepository.save(new User());
-        User otherFollower = userRepository.save(new User());
-
-        followService.follow(user.getId(), follower.getId());
-        followService.follow(user.getId(), otherFollower.getId());
-
-        assertThat(followService.getFollowings(user.getId()))
-                .containsExactly(follower.getId(), otherFollower.getId());
-    }
-
 }
