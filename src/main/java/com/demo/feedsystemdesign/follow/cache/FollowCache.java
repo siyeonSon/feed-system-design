@@ -8,7 +8,7 @@ import java.util.Set;
 
 @RequiredArgsConstructor
 @Component
-public class FollowRedisRepository {
+public class FollowCache {
 
     private static final String KEY = "followCache:targetId:";
 

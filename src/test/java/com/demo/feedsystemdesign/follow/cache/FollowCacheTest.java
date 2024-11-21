@@ -10,10 +10,10 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RedisTest
-class FollowRedisRepositoryTest {
+class FollowCacheTest {
 
     @Autowired
-    private FollowRedisRepository followRedisRepository;
+    private FollowCache followCache;
 
     @Autowired
     private RedisTemplate<String, Long> redisTemplate;
@@ -23,7 +23,7 @@ class FollowRedisRepositoryTest {
         Long sourceId = 1L;
         Long targetId = 2L;
 
-        followRedisRepository.add(sourceId, targetId);
+        followCache.add(sourceId, targetId);
 
         assertThat(redisTemplate.opsForSet().isMember("followCache:targetId:" + targetId, sourceId)).isTrue();
     }
@@ -34,11 +34,11 @@ class FollowRedisRepositoryTest {
         Long followerId = 2L;
         Long otherFollowerId = 3L;
         Long anotherFollowerId = 4L;
-        followRedisRepository.add(followerId, userId);
-        followRedisRepository.add(otherFollowerId, userId);
-        followRedisRepository.add(anotherFollowerId, userId);
+        followCache.add(followerId, userId);
+        followCache.add(otherFollowerId, userId);
+        followCache.add(anotherFollowerId, userId);
 
-        Set<Long> followerIds = followRedisRepository.getFollowerIds(userId);
+        Set<Long> followerIds = followCache.getFollowerIds(userId);
 
         assertThat(followerIds).containsExactly(followerId, otherFollowerId, anotherFollowerId);
     }
