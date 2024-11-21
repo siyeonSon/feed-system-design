@@ -6,8 +6,10 @@ import com.demo.feedsystemdesign.support.general.RedisTest;
 import com.demo.feedsystemdesign.support.general.ServiceTest;
 import com.demo.feedsystemdesign.user.domain.User;
 import com.demo.feedsystemdesign.user.domain.UserRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -21,6 +23,15 @@ class FollowServiceV2Test {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RedisTemplate<String, Long> redisTemplate;
+
+    @BeforeEach
+    void setUp() {
+        // TODO: flushAll() deprecated 문제 해결
+        redisTemplate.getConnectionFactory().getConnection().flushAll();
+    }
 
     @Test
     void 다른_사용자를_팔로우_할_수_있다() {
