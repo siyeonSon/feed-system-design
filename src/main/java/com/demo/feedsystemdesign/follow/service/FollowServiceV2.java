@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static com.demo.feedsystemdesign.common.exception.ErrorCode.USER_NOT_FOUND;
 
@@ -29,17 +28,18 @@ public class FollowServiceV2 {
         validateExists(targetId);
 
         followRepository.save(new Follow(sourceId, targetId));
-        followCache.add(sourceId, targetId);  // TODO: 비동기 이벤트 발생
+        followCache.add(targetId, sourceId);  // TODO: 비동기 이벤트 발생
     }
 
     public List<Long> getFollowers(Long userId) {
         Set<Long> cachedFollowerIds = followCache.getFollowerIds(userId);
         if (cachedFollowerIds.isEmpty() && followCache.notHas(userId)) {
-            Set<Long> followerIds = followRepository.findAllByTargetId(userId)
+            List<Long> followerIds = followRepository.findAllByTargetId(userId)
                     .stream()
                     .map(Follow::getSourceId)
-                    .collect(Collectors.toSet());
-            followerIds.forEach(followerId -> followCache.add(followerId, userId));
+                    .toList();
+            followCache.add(userId, followerIds.toArray(new Long[0]));
+            return followerIds;
         }
         return cachedFollowerIds.stream().toList();
     }

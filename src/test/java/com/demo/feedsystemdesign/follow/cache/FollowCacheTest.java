@@ -23,7 +23,7 @@ class FollowCacheTest {
         Long sourceId = 1L;
         Long targetId = 2L;
 
-        followCache.add(sourceId, targetId);
+        followCache.add(targetId, sourceId);
 
         assertThat(redisTemplate.opsForSet().isMember("followCache:targetId:" + targetId, sourceId)).isTrue();
     }
@@ -34,9 +34,7 @@ class FollowCacheTest {
         Long followerId = 2L;
         Long otherFollowerId = 3L;
         Long anotherFollowerId = 4L;
-        followCache.add(followerId, userId);
-        followCache.add(otherFollowerId, userId);
-        followCache.add(anotherFollowerId, userId);
+        followCache.add(userId, followerId, otherFollowerId, anotherFollowerId);
 
         Set<Long> followerIds = followCache.getFollowerIds(userId);
 

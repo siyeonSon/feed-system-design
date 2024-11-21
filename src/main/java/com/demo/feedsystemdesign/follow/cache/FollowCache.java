@@ -14,8 +14,8 @@ public class FollowCache {
 
     private final RedisTemplate<String, Long> redisTemplate;
 
-    public void add(Long sourceId, Long targetId) {
-        redisTemplate.opsForSet().add(KEY + targetId, sourceId);
+    public void add(Long targetId, Long... sourceIds) {
+        redisTemplate.opsForSet().add(KEY + targetId, sourceIds);
     }
 
     public Set<Long> getFollowerIds(Long userId) {
