@@ -9,6 +9,7 @@ import org.springframework.data.redis.connection.lettuce.LettuceClientConfigurat
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.time.Duration;
@@ -42,6 +43,17 @@ public class RedisConfig {
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setDefaultSerializer(new GenericJackson2JsonRedisSerializer());
         // TODO: GenericJackson2JsonRedisSerializer vs Jackson2JsonRedisSerializer
+
+        return redisTemplate;
+    }
+
+    @Bean
+    public RedisTemplate<String, Long> longRedisTemplate() {
+        RedisTemplate<String, Long> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(redisConnectionFactory());
+
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setDefaultSerializer(new Jackson2JsonRedisSerializer<>(Long.class));
 
         return redisTemplate;
     }
