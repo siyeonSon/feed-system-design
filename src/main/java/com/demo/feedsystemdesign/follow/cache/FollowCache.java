@@ -21,4 +21,9 @@ public class FollowCache {
     public Set<Long> getFollowerIds(Long userId) {
         return redisTemplate.opsForSet().members(KEY + userId);
     }
+
+    public Boolean notHas(Long userId) {
+        return Boolean.FALSE.equals(redisTemplate.opsForSet().getOperations().hasKey(KEY + userId));
+    }
+
 }
