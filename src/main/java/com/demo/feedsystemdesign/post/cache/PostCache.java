@@ -19,8 +19,8 @@ public class PostCache {
         redisTemplate.opsForValue().set(KEY + post.getId(), PostCacheDto.of(post));
     }
 
-
     public PostCacheDto getById(Long postId) {
         return redisTemplate.opsForValue().get(KEY + postId);
     }
+
 }
