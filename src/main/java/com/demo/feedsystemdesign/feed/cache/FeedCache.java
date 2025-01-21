@@ -24,4 +24,8 @@ public class FeedCache {
         return redisTemplate.opsForList().range(KEY + userId, 0, -1);
     }
 
+    public Boolean notHas(Long userId) {
+        return Boolean.FALSE.equals(redisTemplate.opsForList().getOperations().hasKey(KEY + userId));
+    }
+    
 }

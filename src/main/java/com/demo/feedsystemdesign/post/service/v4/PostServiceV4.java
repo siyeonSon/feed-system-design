@@ -37,6 +37,11 @@ public class PostServiceV4 {
         return PostResponse.of(saved);
     }
 
+    @Transactional(readOnly = true)
+    public List<Post> getPostsBy(List<Long> postIds) {
+        return postRepository.findAllById(postIds);
+    }
+
     private void validate(Long userId) {
         userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
