@@ -4,8 +4,8 @@ import com.demo.feedsystemdesign.feed.domain.Feed;
 import com.demo.feedsystemdesign.feed.domain.FeedPost;
 import com.demo.feedsystemdesign.feed.domain.FeedPostRepository;
 import com.demo.feedsystemdesign.follow.service.FollowService;
-import com.demo.feedsystemdesign.post.service.v3.event.PostCreatedEvent;
 import com.demo.feedsystemdesign.post.service.v3.PostServiceV3;
+import com.demo.feedsystemdesign.post.service.v3.event.PostCreatedEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
@@ -28,7 +28,7 @@ public class FeedServiceV3 {
 
         List<Long> postIds = feedPosts.stream().map(FeedPost::getPostId).toList();
 
-        return new Feed(postService.getPostsBy(postIds));
+        return Feed.of(postService.getPostsBy(postIds));
     }
 
     @Async

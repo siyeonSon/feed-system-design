@@ -3,6 +3,7 @@ package com.demo.feedsystemdesign.feed.service.v3;
 import com.demo.feedsystemdesign.follow.service.FollowService;
 import com.demo.feedsystemdesign.post.domain.Post;
 import com.demo.feedsystemdesign.post.domain.PostRepository;
+import com.demo.feedsystemdesign.post.service.dto.PostResponse;
 import com.demo.feedsystemdesign.post.service.v3.event.PostCreatedEvent;
 import com.demo.feedsystemdesign.support.general.ServiceTest;
 import com.demo.feedsystemdesign.user.domain.User;
@@ -41,7 +42,7 @@ class FeedServiceV3Test {
         }
 
         assertThat(feedService.getFeed(follower.getId()).getPosts())
-                .extracting("id")
+                .map(PostResponse::postId)
                 .containsExactly(post.getId());
     }
 

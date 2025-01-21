@@ -45,7 +45,7 @@ public class PostServiceV3IntegrationTest {
         }
 
         assertThat(feedService.getFeed(follower.getId()).getPosts())
-                .extracting("id")
+                .map(PostResponse::postId)
                 .containsExactly(post.postId());
     }
 }

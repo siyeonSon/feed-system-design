@@ -33,7 +33,7 @@ class FeedPostInsertionTest {
         feedPostInsertion.insert(user.getId(), post.postId());
 
         assertThat(feedService.getFeed(user.getId()).getPosts())
-                .extracting("id")
+                .map(PostResponse::postId)
                 .containsExactly(post.postId());
     }
 }

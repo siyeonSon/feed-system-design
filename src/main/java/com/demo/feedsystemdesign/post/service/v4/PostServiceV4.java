@@ -1,7 +1,9 @@
 package com.demo.feedsystemdesign.post.service.v4;
 
+import com.demo.feedsystemdesign.common.exception.ErrorCode;
 import com.demo.feedsystemdesign.common.exception.NotFoundException;
 import com.demo.feedsystemdesign.post.cache.AsyncPostCaching;
+import com.demo.feedsystemdesign.post.cache.PostCache;
 import com.demo.feedsystemdesign.post.domain.Post;
 import com.demo.feedsystemdesign.post.domain.PostRepository;
 import com.demo.feedsystemdesign.post.service.dto.PostResponse;
@@ -24,6 +26,7 @@ public class PostServiceV4 {
     private final UserRepository userRepository;
     private final ApplicationEventPublisher eventPublisher;
     private final AsyncPostCaching asyncPostCaching;
+    private final PostCache postCache;
 
     @Transactional
     public PostResponse createPost(Long userId, String content) {
@@ -38,8 +41,17 @@ public class PostServiceV4 {
     }
 
     @Transactional(readOnly = true)
-    public List<Post> getPostsBy(List<Long> postIds) {
-        return postRepository.findAllById(postIds);
+    public List<PostResponse> getPostsBy(List<Long> postIds) {
+        return postIds.stream()
+                .map(it -> {
+                    if (postCache.contains(it)) {
+                        return PostResponse.of(postCache.getById(it));
+                    }
+                    return postRepository.findById(it)
+                            .map(PostResponse::of)
+                            .orElseThrow(() -> new NotFoundException(ErrorCode.POST_NOT_FOUND));
+                })
+                .toList();
     }
 
     private void validate(Long userId) {
