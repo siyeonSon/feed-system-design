@@ -35,7 +35,7 @@ class PostServiceV2Test {
         PostResponse post = postService.createPost(user.getId(), "test content");
 
         assertThat(feedService.getFeed(follower.getId()).getPosts())
-                .extracting("id")
+                .map(PostResponse::postId)
                 .containsExactly(post.postId());
     }
 }

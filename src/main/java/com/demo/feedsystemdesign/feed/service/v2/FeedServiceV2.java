@@ -21,7 +21,7 @@ public class FeedServiceV2 {
 
         List<Long> postIds = feedPosts.stream().map(FeedPost::getPostId).toList();
 
-        return new Feed(postService.getPostsBy(postIds));
+        return Feed.of(postService.getPostsBy(postIds));
     }
 
 }

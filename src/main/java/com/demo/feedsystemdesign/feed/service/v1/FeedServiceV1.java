@@ -21,7 +21,7 @@ public class FeedServiceV1 {
         List<Post> posts = followers.stream()
                 .flatMap(followerId -> postService.getPosts(followerId).stream())
                 .toList();
-        return new Feed(posts);
+        return Feed.of(posts);
     }
 
 }

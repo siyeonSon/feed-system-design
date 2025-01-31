@@ -46,7 +46,7 @@ public class FeedServiceV1Test {
         Feed feed = feedService.getFeed(user.getId());
 
         assertThat(feed.getPosts())
-                .allMatch(post -> post.getUserId().equals(subject.getId()));
+                .allMatch(post -> post.userId().equals(subject.getId()));
     }
 
     @Test
@@ -59,6 +59,6 @@ public class FeedServiceV1Test {
         Feed feed = feedService.getFeed(user.getId());
 
         assertThat(feed.getPosts())
-                .noneMatch(post -> post.getUserId().equals(subject.getId()));
+                .noneMatch(post -> post.userId().equals(subject.getId()));
     }
 }

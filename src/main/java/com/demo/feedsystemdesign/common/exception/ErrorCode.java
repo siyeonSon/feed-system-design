@@ -15,6 +15,7 @@ public enum ErrorCode {
 
     POST_CONTENT_TOO_SHORT(400, "P_001", "게시물 내용이 짧습니다."),
     POST_CONTENT_TOO_LONG(400, "P_002", "게시물 내용이 너무 깁니다."),
+    POST_NOT_FOUND(500, "P_003", "포스트가 존재하지 않습니다."),
 
     SELF_FOLLOWING(400, "F_001", "자신을 팔로우 할 수 없습니다."),
     ;

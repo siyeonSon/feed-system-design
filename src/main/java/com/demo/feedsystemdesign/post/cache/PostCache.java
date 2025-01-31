@@ -23,4 +23,7 @@ public class PostCache {
         return redisTemplate.opsForValue().get(KEY + postId);
     }
 
+    public boolean contains(Long postId) {
+        return Boolean.TRUE.equals(redisTemplate.hasKey(KEY + postId));
+    }
 }
